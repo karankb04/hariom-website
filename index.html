@@ -298,7 +298,7 @@ a{color:inherit;text-decoration:none}
   box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.7);cursor:grab;touch-action:none;
   border:1px solid rgba(0,87,152,.12)}
 .globe-stage:active{cursor:grabbing}
-.globe-stage canvas{display:block;width:100%;height:100%}
+.globe-stage canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
 .globe-stage::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:28px;box-shadow:inset 0 0 80px 10px rgba(184,208,232,.4)}
 .globe-hint{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:8px;
   font-size:13px;font-weight:600;color:var(--blue-deep);background:rgba(255,255,255,.75);border:1px solid rgba(0,87,152,.22);
@@ -1072,289 +1072,186 @@ $$('[data-img]').forEach(el=>{
   bObs.observe(bsec);
 })();
 
+
+
 /* ============================================================
    INTERACTIVE 3D GLOBE — dotted · brand blue on light sphere
-   Glissez pour tourner · molette/pincez pour zoomer
    ============================================================ */
-(function(){
-  const LAND_MASK = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_specular_2048.jpg";
-  const stage = document.getElementById('stage');
-  const hint  = document.getElementById('hint');
-  const tip   = document.getElementById('tip');
-  if(!stage) return;
+(function () {
+  'use strict';
 
-  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
-  const D2R = Math.PI / 180;
-  const R   = 2; // globe radius
+  var LAND_MASK = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_specular_2048.jpg';
+  var R = 2, D2R = Math.PI / 180, ORANGE = 0xFE7F04;
 
-  const ORIGIN = {n:'Pointe-Noire', lat:-4.78,  lon:11.86};
-  const CITIES = [
-    {n:'Dubaï',       lat:25.20, lon:55.27},
-    {n:'Paris',       lat:48.86, lon:2.35},
-    {n:'Londres',     lat:51.51, lon:-0.13},
-    {n:'Istanbul',    lat:41.01, lon:28.98},
-    {n:'Bangkok',     lat:13.76, lon:100.50},
-    {n:'Singapour',   lat:1.35,  lon:103.82},
-    {n:'Île Maurice', lat:-20.35,lon:57.55},
-    {n:'Le Cap',      lat:-33.92,lon:18.42}
+  var ORIGIN = { n: 'Pointe-Noire', lat: -4.78, lon: 11.86 };
+  var CITIES = [
+    { n: 'Dubaï', lat: 25.20, lon: 55.27 }, { n: 'Paris', lat: 48.86, lon: 2.35 },
+    { n: 'Londres', lat: 51.51, lon: -0.13 }, { n: 'Istanbul', lat: 41.01, lon: 28.98 },
+    { n: 'Bangkok', lat: 13.76, lon: 100.50 }, { n: 'Singapour', lat: 1.35, lon: 103.82 },
+    { n: 'Île Maurice', lat: -20.35, lon: 57.55 }, { n: 'Le Cap', lat: -33.92, lon: 18.42 }
   ];
 
-  /* ---- helpers ---- */
-  function vec(lat, lon, r){
-    r = r || R;
-    const phi   = (90 - lat) * D2R;
-    const theta = (lon + 180) * D2R;
-    return new THREE.Vector3(
-      -r * Math.sin(phi) * Math.cos(theta),
-       r * Math.cos(phi),
-       r * Math.sin(phi) * Math.sin(theta)
-    );
+  var stage = document.getElementById('globeStage');
+  var hint  = document.getElementById('globeHint');
+  var tip   = document.getElementById('globeTip');
+  if (!stage || typeof THREE === 'undefined') return;
+  try { var tc = document.createElement('canvas'); if (!tc.getContext('webgl') && !tc.getContext('experimental-webgl')) return; } catch (e) { return; }
+
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+
+  function vec(lat, lon, radius) {
+    radius = (radius !== undefined) ? radius : R;
+    var phi = (90 - lat) * D2R, theta = (lon + 180) * D2R;
+    return new THREE.Vector3(-radius * Math.sin(phi) * Math.cos(theta), radius * Math.cos(phi), radius * Math.sin(phi) * Math.sin(theta));
   }
 
-  /* ---- renderer / scene ---- */
-  const scene    = new THREE.Scene();
-  const camera   = new THREE.PerspectiveCamera(42, stage.clientWidth / stage.clientHeight, 0.1, 100);
-  let tZoom = 6; camera.position.z = tZoom;
-
-  const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.setSize(stage.clientWidth, stage.clientHeight);
-  stage.insertBefore(renderer.domElement, stage.firstChild);
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.z = 6;
+  var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  var cvs = renderer.domElement;
+  cvs.style.position = 'absolute'; cvs.style.top = '0'; cvs.style.left = '0';
+  cvs.style.width = '100%'; cvs.style.height = '100%';
+  stage.insertBefore(cvs, stage.firstChild);
 
   scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-  const sun = new THREE.DirectionalLight(0xfff8f0, 0.4);
-  sun.position.set(3, 2, 5); scene.add(sun);
+  var sun = new THREE.DirectionalLight(0xfff8f0, 0.4); sun.position.set(3, 2, 5); scene.add(sun);
+  var world = new THREE.Group(); scene.add(world);
 
-  const world = new THREE.Group(); scene.add(world);
+  world.add(new THREE.Mesh(new THREE.SphereGeometry(R * 0.984, 64, 64),
+    new THREE.MeshPhongMaterial({ color: 0xd4e5f3, emissive: 0xbcd4ea, emissiveIntensity: 0.18, shininess: 3 })));
 
-  /* ---- ocean sphere (pale blue-grey) ---- */
-  world.add(new THREE.Mesh(
-    new THREE.SphereGeometry(R * 0.984, 64, 64),
-    new THREE.MeshPhongMaterial({color:0xd4e5f3, emissive:0xbcd4ea, emissiveIntensity:0.18, shininess:3})
-  ));
-
-  /* ---- dot sprite: brand blue ---- */
-  function makeDotTex(){
-    const c = document.createElement('canvas'); c.width = c.height = 64;
-    const x = c.getContext('2d');
-    const g = x.createRadialGradient(32,32,0, 32,32,30);
-    g.addColorStop(0,   'rgba(0,87,152,1)');
-    g.addColorStop(0.55,'rgba(0,87,152,.85)');
-    g.addColorStop(1,   'rgba(0,87,152,0)');
-    x.fillStyle = g; x.beginPath(); x.arc(32,32,32,0,7); x.fill();
+  function makeDotTex() {
+    var c = document.createElement('canvas'); c.width = c.height = 64;
+    var x = c.getContext('2d');
+    var g = x.createRadialGradient(32, 32, 0, 32, 32, 30);
+    g.addColorStop(0, 'rgba(0,87,152,1)'); g.addColorStop(0.55, 'rgba(0,87,152,.85)'); g.addColorStop(1, 'rgba(0,87,152,0)');
+    x.fillStyle = g; x.beginPath(); x.arc(32, 32, 32, 0, Math.PI * 2); x.fill();
     return new THREE.CanvasTexture(c);
   }
-  const DOT = makeDotTex();
+  var DOT = makeDotTex();
 
-  /* ---- fibonacci lattice ---- */
-  function fibSphere(n){
-    const pts = [], ga = Math.PI*(3 - Math.sqrt(5));
-    for(let i=0; i<n; i++){
-      const y = 1-(i/(n-1))*2, r = Math.sqrt(1-y*y), t = ga*i;
-      pts.push(new THREE.Vector3(Math.cos(t)*r, y, Math.sin(t)*r).multiplyScalar(R));
-    }
+  function fibSphere(n) {
+    var pts = [], ga = Math.PI * (3 - Math.sqrt(5)), i;
+    for (i = 0; i < n; i++) { var y = 1 - (i / (n - 1)) * 2, rr = Math.sqrt(1 - y * y), t = ga * i; pts.push(new THREE.Vector3(Math.cos(t) * rr, y, Math.sin(t) * rr).multiplyScalar(R)); }
     return pts;
   }
-
-  function buildDots(isLand){
-    const cands = fibSphere(18000), pos = [];
-    cands.forEach(v => {
-      const lat = 90 - Math.acos(v.y / R) / D2R;
-      const lon = Math.atan2(v.z, -v.x) / D2R - 180;
-      if(isLand(lat, lon)) pos.push(v.x*1.004, v.y*1.004, v.z*1.004);
-    });
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
-    world.add(new THREE.Points(geo, new THREE.PointsMaterial({
-      color:0x005798, size:0.052, map:DOT,
-      transparent:true, alphaTest:0.28, depthWrite:false, sizeAttenuation:true
-    })));
+  function buildDots(isLand) {
+    var cands = fibSphere(18000), pos = [], i, v, lat, lon;
+    for (i = 0; i < cands.length; i++) { v = cands[i]; lat = 90 - Math.acos(v.y / R) / D2R; lon = Math.atan2(v.z, -v.x) / D2R - 180; if (isLand(lat, lon)) pos.push(v.x * 1.004, v.y * 1.004, v.z * 1.004); }
+    var geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    world.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: 0x005798, size: 0.052, map: DOT, transparent: true, alphaTest: 0.28, depthWrite: false, sizeAttenuation: true })));
   }
-
-  /* graticule fallback if mask fails */
-  function buildGraticule(){
-    const m = new THREE.LineBasicMaterial({color:0x005798, transparent:true, opacity:0.28});
-    for(let la=-60; la<=60; la+=30){
-      const pts=[]; for(let lo=-180;lo<=180;lo+=6) pts.push(vec(la,lo,R*1.003));
-      world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), m));
-    }
-    for(let lo=-180; lo<180; lo+=30){
-      const pts=[]; for(let la=-90;la<=90;la+=6) pts.push(vec(la,lo,R*1.003));
-      world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), m));
-    }
+  function buildGraticule() {
+    var m = new THREE.LineBasicMaterial({ color: 0x005798, transparent: true, opacity: 0.3 }), la, lo, pts;
+    for (la = -60; la <= 60; la += 30) { pts = []; for (lo = -180; lo <= 180; lo += 6) pts.push(vec(la, lo, R * 1.003)); world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), m)); }
+    for (lo = -180; lo < 180; lo += 30) { pts = []; for (la = -90; la <= 90; la += 6) pts.push(vec(la, lo, R * 1.003)); world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), m)); }
   }
-
-  /* sample the land mask */
-  const img = new Image(); img.crossOrigin = 'anonymous';
-  img.onload = () => {
-    const W=512, H=256, cv=document.createElement('canvas');
-    cv.width=W; cv.height=H;
-    const cx=cv.getContext('2d'); cx.drawImage(img, 0,0, W,H);
-    const data = cx.getImageData(0,0,W,H).data;
-    buildDots((lat,lon) => {
-      let u = (lon+180)/360, v = (90-lat)/180;
-      u = ((u%1)+1)%1; v = Math.min(0.999, Math.max(0, v));
-      const px = (Math.floor(v*H)*W + Math.floor(u*W))*4;
-      return (data[px]+data[px+1]+data[px+2])/3 < 95; // dark = land
-    });
+  var landImg = new Image(); landImg.crossOrigin = 'anonymous';
+  landImg.onload = function () {
+    var W = 512, H = 256, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    var cx = cv.getContext('2d'); cx.drawImage(landImg, 0, 0, W, H);
+    var data = cx.getImageData(0, 0, W, H).data;
+    buildDots(function (lat, lon) { var u = (lon + 180) / 360, v = (90 - lat) / 180; u = ((u % 1) + 1) % 1; v = Math.min(0.999, Math.max(0, v)); var px = (Math.floor(v * H) * W + Math.floor(u * W)) * 4; return (data[px] + data[px + 1] + data[px + 2]) / 3 < 95; });
   };
-  img.onerror = buildGraticule;
-  img.src = LAND_MASK;
+  landImg.onerror = buildGraticule;
+  landImg.src = LAND_MASK;
 
-  /* subtle atmosphere on light bg */
-  scene.add(new THREE.Mesh(
-    new THREE.SphereGeometry(R*1.13, 48, 48),
-    new THREE.MeshBasicMaterial({color:0x90c4e8, transparent:true, opacity:0.08,
-      side:THREE.BackSide, blending:THREE.AdditiveBlending})
-  ));
+  scene.add(new THREE.Mesh(new THREE.SphereGeometry(R * 1.13, 48, 48),
+    new THREE.MeshBasicMaterial({ color: 0x90c4e8, transparent: true, opacity: 0.08, side: THREE.BackSide, blending: THREE.AdditiveBlending })));
 
-  /* ---- markers ---- */
-  const ORANGE = 0xFE7F04;
-  const markers = [];
-  function addMarker(c, isOrigin){
-    const g = new THREE.Group();
-    const dot  = new THREE.Mesh(new THREE.SphereGeometry(isOrigin?0.075:0.054,16,16), new THREE.MeshBasicMaterial({color:ORANGE}));
-    const halo = new THREE.Mesh(new THREE.SphereGeometry(isOrigin?0.15:0.11,16,16),   new THREE.MeshBasicMaterial({color:ORANGE, transparent:true, opacity:0.3}));
-    g.add(dot); g.add(halo);
-    g.position.copy(vec(c.lat, c.lon, R*1.015));
-    world.add(g);
-    markers.push({g, dot, halo, name:c.n, isOrigin});
+  var markers = [];
+  function addMarker(c, isOrigin) {
+    var g = new THREE.Group();
+    var dot = new THREE.Mesh(new THREE.SphereGeometry(isOrigin ? 0.075 : 0.054, 16, 16), new THREE.MeshBasicMaterial({ color: ORANGE }));
+    var halo = new THREE.Mesh(new THREE.SphereGeometry(isOrigin ? 0.15 : 0.11, 16, 16), new THREE.MeshBasicMaterial({ color: ORANGE, transparent: true, opacity: 0.3 }));
+    g.add(dot); g.add(halo); g.position.copy(vec(c.lat, c.lon, R * 1.015)); world.add(g);
+    markers.push({ g: g, dot: dot, halo: halo, name: c.n, isOrigin: isOrigin });
   }
-  CITIES.forEach(c => addMarker(c, false));
+  var ci; for (ci = 0; ci < CITIES.length; ci++) addMarker(CITIES[ci], false);
   addMarker(ORIGIN, true);
 
-  /* ---- arcs + travelling planes ---- */
-  const arcs = [];
-  const originPt = vec(ORIGIN.lat, ORIGIN.lon, R*1.015);
-  CITIES.forEach((c, i) => {
-    const end = vec(c.lat, c.lon, R*1.015);
-    const mid = originPt.clone().add(end).multiplyScalar(0.5);
-    mid.normalize().multiplyScalar(R + originPt.distanceTo(end)*0.55);
-    const curve = new THREE.QuadraticBezierCurve3(originPt.clone(), mid, end);
-    world.add(new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(curve.getPoints(64)),
-      new THREE.LineBasicMaterial({color:ORANGE, transparent:true, opacity:0.65})
-    ));
-    const plane = new THREE.Mesh(
-      new THREE.SphereGeometry(0.035,10,10),
-      new THREE.MeshBasicMaterial({color:0xffe0b0})
-    );
-    world.add(plane);
-    arcs.push({curve, plane, offset: i/CITIES.length});
-  });
-
-  /* ---- initial orientation: Africa faces viewer ---- */
-  function initRotY(lat, lon){
-    const phi=(90-lat)*D2R, theta=(lon+180)*D2R;
-    return Math.atan2(Math.sin(phi)*Math.cos(theta), Math.sin(phi)*Math.sin(theta));
+  var arcs = [], originPt = vec(ORIGIN.lat, ORIGIN.lon, R * 1.015), ai;
+  for (ai = 0; ai < CITIES.length; ai++) {
+    var city = CITIES[ai], endPt = vec(city.lat, city.lon, R * 1.015);
+    var mid = originPt.clone().add(endPt).multiplyScalar(0.5);
+    mid.normalize().multiplyScalar(R + originPt.distanceTo(endPt) * 0.55);
+    var curve = new THREE.QuadraticBezierCurve3(originPt.clone(), mid, endPt);
+    world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(64)), new THREE.LineBasicMaterial({ color: ORANGE, transparent: true, opacity: 0.65 })));
+    var plane = new THREE.Mesh(new THREE.SphereGeometry(0.035, 10, 10), new THREE.MeshBasicMaterial({ color: 0xffe0b0 }));
+    world.add(plane); arcs.push({ curve: curve, plane: plane, offset: ai / CITIES.length });
   }
-  let rotY=initRotY(ORIGIN.lat, ORIGIN.lon)-0.35, rotX=0.32;
-  let velX=0, velY=0, dragging=false, lastInteract=0;
-  const clamp = (v,a,b) => Math.max(a, Math.min(b,v));
 
-  /* ---- pointer controls ---- */
-  const pts = new Map(); let pinchStart=0, pinchZoom=0, lx=0, ly=0;
-  const mark = () => { lastInteract=performance.now(); hint.classList.add('hide'); };
+  function initRotY(lat, lon) { var phi = (90 - lat) * D2R, theta = (lon + 180) * D2R; return Math.atan2(Math.sin(phi) * Math.cos(theta), Math.sin(phi) * Math.sin(theta)); }
+  var rotY = initRotY(ORIGIN.lat, ORIGIN.lon) - 0.35, rotX = 0.32, velX = 0, velY = 0;
+  var dragging = false, lastInteract = 0, tZoom = 6;
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function markInteract() { lastInteract = performance.now(); hint && hint.classList.add('hide'); }
 
-  stage.addEventListener('pointerdown', e => {
-    stage.setPointerCapture(e.pointerId);
-    pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
-    if(pts.size===1){ dragging=true; lx=e.clientX; ly=e.clientY; velX=velY=0; }
-    else if(pts.size===2){
-      const p=[...pts.values()];
-      pinchStart=Math.hypot(p[0].x-p[1].x, p[0].y-p[1].y);
-      pinchZoom=tZoom;
-    }
-    mark();
+  var ptrMap = new Map(), pinchStart = 0, pinchZoom = 0, lx = 0, ly = 0;
+  stage.addEventListener('pointerdown', function (e) {
+    stage.setPointerCapture(e.pointerId); ptrMap.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (ptrMap.size === 1) { dragging = true; lx = e.clientX; ly = e.clientY; velX = velY = 0; }
+    else if (ptrMap.size === 2) { var p = Array.from(ptrMap.values()); pinchStart = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); pinchZoom = tZoom; }
+    markInteract();
   });
-
-  stage.addEventListener('pointermove', e => {
-    if(pts.has(e.pointerId)) pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
-    if(pts.size===2){
-      const p=[...pts.values()], d=Math.hypot(p[0].x-p[1].x, p[0].y-p[1].y);
-      if(pinchStart) tZoom=clamp(pinchZoom*pinchStart/d, 3.5, 9);
-      mark(); return;
-    }
-    if(dragging){
-      const dx=e.clientX-lx, dy=e.clientY-ly; lx=e.clientX; ly=e.clientY;
-      rotY+=dx*0.005; rotX=clamp(rotX+dy*0.005,-1.25,1.25);
-      velY=dx*0.005; velX=dy*0.005; mark();
-    } else hoverTest(e);
+  stage.addEventListener('pointermove', function (e) {
+    if (ptrMap.has(e.pointerId)) ptrMap.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (ptrMap.size === 2) { var p = Array.from(ptrMap.values()), d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y); if (pinchStart) tZoom = clamp(pinchZoom * pinchStart / d, 3.5, 9); markInteract(); return; }
+    if (dragging) { var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; rotY += dx * 0.005; rotX = clamp(rotX + dy * 0.005, -1.25, 1.25); velY = dx * 0.005; velX = dy * 0.005; markInteract(); }
+    else hoverTest(e);
   });
+  function endPtr(e) { ptrMap.delete(e.pointerId); if (ptrMap.size < 2) pinchStart = 0; if (ptrMap.size === 0) dragging = false; }
+  stage.addEventListener('pointerup', endPtr); stage.addEventListener('pointercancel', endPtr);
+  stage.addEventListener('wheel', function (e) { e.preventDefault(); tZoom = clamp(tZoom + e.deltaY * 0.0022, 3.5, 9); markInteract(); }, { passive: false });
 
-  function endPtr(e){ pts.delete(e.pointerId); if(pts.size<2) pinchStart=0; if(pts.size===0) dragging=false; }
-  stage.addEventListener('pointerup',     endPtr);
-  stage.addEventListener('pointercancel', endPtr);
-  stage.addEventListener('wheel', e => {
-    e.preventDefault();
-    tZoom=clamp(tZoom+e.deltaY*0.0022, 3.5, 9); mark();
-  },{passive:false});
-
-  /* ---- hover tooltip ---- */
-  const ray=new THREE.Raycaster(), m2=new THREE.Vector2(); let hovered=null;
-  function hoverTest(e){
-    const r=stage.getBoundingClientRect();
-    m2.x=((e.clientX-r.left)/r.width)*2-1;
-    m2.y=-((e.clientY-r.top)/r.height)*2+1;
-    ray.setFromCamera(m2, camera);
-    const hits=ray.intersectObjects(markers.map(m=>m.dot));
-    hovered = hits.length ? markers.find(m=>m.dot===hits[0].object) : null;
+  var ray = new THREE.Raycaster(), mouse2 = new THREE.Vector2(), hovered = null;
+  function hoverTest(e) {
+    var r = stage.getBoundingClientRect();
+    mouse2.x = ((e.clientX - r.left) / r.width) * 2 - 1; mouse2.y = ((e.clientY - r.top) / r.height) * -2 + 1;
+    ray.setFromCamera(mouse2, camera);
+    var hits = ray.intersectObjects(markers.map(function (m) { return m.dot; }));
+    hovered = hits.length ? markers.find(function (m) { return m.dot === hits[0].object; }) : null;
     stage.style.cursor = hovered ? 'pointer' : 'grab';
   }
 
-  /* ---- render loop ---- */
-  const tmp=new THREE.Vector3(); let running=false;
-  function frame(t){
-    if(!running) return;
+  function sizeNow() {
+    var r = stage.getBoundingClientRect();
+    var w = Math.round(r.width), h = Math.round(r.height);
+    if (w > 0 && h > 0) { camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.setSize(w, h, false); return true; }
+    return false;
+  }
+  if (window.ResizeObserver) new ResizeObserver(sizeNow).observe(stage);
+  else window.addEventListener('resize', sizeNow);
+
+  var tmp = new THREE.Vector3(), paused = false, started = false;
+  function frame(t) {
     requestAnimationFrame(frame);
-    const time = t*0.001;
-    if(!dragging){
-      rotY+=velY; rotX=clamp(rotX+velX,-1.25,1.25); velY*=0.94; velX*=0.94;
-      if(!reduce && performance.now()-lastInteract>2600) rotY+=0.0016;
-    }
-    world.rotation.y=rotY; world.rotation.x=rotX;
-    camera.position.z += (tZoom-camera.position.z)*0.1;
-
-    markers.forEach(m => {
-      const s=1+Math.sin(time*2)*0.25;
-      m.halo.scale.setScalar(s);
-      m.halo.material.opacity=0.32-0.18*Math.sin(time*2);
-    });
-    if(!reduce) arcs.forEach(a => {
-      a.plane.position.copy(a.curve.getPointAt((time*0.12+a.offset)%1));
-    });
-
-    if(hovered){
-      hovered.g.getWorldPosition(tmp);
-      if(tmp.clone().normalize().z>0.12){
-        tmp.project(camera);
-        const r=stage.getBoundingClientRect();
-        tip.style.left=((tmp.x*0.5+0.5)*r.width)+'px';
-        tip.style.top=((-tmp.y*0.5+0.5)*r.height)+'px';
-        tip.innerHTML = hovered.isOrigin ? '<b>'+hovered.name+'</b> · départ' : hovered.name;
-        tip.classList.add('show');
-      } else tip.classList.remove('show');
-    } else tip.classList.remove('show');
-
+    if (paused) return;
+    var time = t * 0.001;
+    if (!dragging) { rotY += velY; rotX = clamp(rotX + velX, -1.25, 1.25); velY *= 0.94; velX *= 0.94; if (!reduce && performance.now() - lastInteract > 2600) rotY += 0.0016; }
+    world.rotation.y = rotY; world.rotation.x = rotX;
+    camera.position.z += (tZoom - camera.position.z) * 0.1;
+    var mi, mk, s;
+    for (mi = 0; mi < markers.length; mi++) { mk = markers[mi]; s = 1 + Math.sin(time * 2) * 0.25; mk.halo.scale.setScalar(s); mk.halo.material.opacity = 0.32 - 0.18 * Math.sin(time * 2); }
+    if (!reduce) { var ri, arc; for (ri = 0; ri < arcs.length; ri++) { arc = arcs[ri]; arc.plane.position.copy(arc.curve.getPointAt((time * 0.12 + arc.offset) % 1)); } }
+    if (hovered) { hovered.g.getWorldPosition(tmp); var n = tmp.clone().normalize(); if (n.z > 0.12) { tmp.project(camera); var rect = stage.getBoundingClientRect(); tip.style.left = ((tmp.x * 0.5 + 0.5) * rect.width) + 'px'; tip.style.top = ((tmp.y * -0.5 + 0.5) * rect.height) + 'px'; tip.innerHTML = hovered.isOrigin ? '<b>' + hovered.name + '</b> · départ' : hovered.name; tip.classList.add('show'); } else tip.classList.remove('show'); }
+    else tip.classList.remove('show');
     renderer.render(scene, camera);
   }
 
-  /* ---- resize ---- */
-  function resize(){
-    const w=stage.clientWidth, h=stage.clientHeight;
-    if(!w||!h) return;
-    camera.aspect=w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h);
+  if (window.IntersectionObserver) new IntersectionObserver(function (es) { es.forEach(function (e) { paused = !e.isIntersecting; }); }, { threshold: 0.01 }).observe(stage);
+
+  var tries = 0;
+  function boot() {
+    if (sizeNow()) { if (!started) { started = true; requestAnimationFrame(frame); } return; }
+    if (tries++ < 60) requestAnimationFrame(boot);
   }
-  new ResizeObserver(resize).observe(stage);
+  boot();
 
-  /* ---- only render while visible ---- */
-  new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting && !running){ running=true; requestAnimationFrame(frame); }
-    else if(!e.isIntersecting) running=false;
-  }),{threshold:0.05}).observe(stage);
-
-  setTimeout(()=>{ if(performance.now()-lastInteract<100) hint.classList.add('hide'); },10000);
-})();
+  setTimeout(function () { if (performance.now() - lastInteract < 100 && hint) hint.classList.add('hide'); }, 10000);
+}());
 
 /* ============================================================
    INTERACTIONS
