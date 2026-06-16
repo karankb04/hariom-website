@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hariom Travels — Votre spécialiste voyage depuis 2009 | Pointe-Noire, Congo</title>
+<meta name="description" content="Hariom Travels, agence de voyage certifiée IATA à Pointe-Noire depuis 2009. Forfaits Dubaï, Paris, Singapour, Istanbul, Bangkok, Maurice. Billets d'avion, hôtels, visa et assistance voyage.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#005798;
+  --blue-deep:#00243f;
+  --blue-mid:#013e6b;
+  --blue-glow:#1a78c2;
+  --orange:#FE7F04;
+  --orange-soft:#ff9a3d;
+  --ivory:#FBF7F0;
+  --sand:#F3EADB;
+  --ink:#0e2233;
+  --muted:#5c6b78;
+  --line:rgba(0,87,152,.14);
+  --shadow:0 24px 60px -28px rgba(0,36,63,.45);
+  --shadow-sm:0 12px 30px -18px rgba(0,36,63,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--ivory);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;line-height:1.08;font-weight:600;letter-spacing:-.01em}
+.it{font-style:italic;color:var(--orange);font-weight:500}
+.it-light{font-style:italic;font-weight:500}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 26px}
+.section{padding:104px 0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:12.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--orange);border-radius:2px}
+.eyebrow.center{justify-content:center}
+.eyebrow.center::before{display:none}
+.sec-title{font-size:clamp(31px,4.6vw,52px);margin-bottom:16px}
+.sec-lead{font-size:17px;color:var(--muted);max-width:580px}
+.head-center{text-align:center;max-width:680px;margin:0 auto 58px}
+.head-center .sec-lead{margin:0 auto}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Plus Jakarta Sans';font-weight:700;font-size:16px;
+  padding:16px 30px;border-radius:60px;border:none;cursor:pointer;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s;
+  text-align:center;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 14px 30px -10px rgba(254,127,4,.6)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 38px -10px rgba(254,127,4,.7)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.5);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(255,255,255,.22);transform:translateY(-3px)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
+.btn-lg{padding:18px 38px;font-size:17px}
+.btn-block{width:100%}
+
+/* ANNOUNCEMENT BAR */
+.announce{
+  background:var(--blue-deep);color:#fff;text-align:center;
+  font-size:13.5px;letter-spacing:.02em;padding:9px 18px;position:relative;z-index:120;
+}
+.announce b{color:var(--orange-soft)}
+.announce .dot{color:var(--orange);margin:0 10px;font-weight:700}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:110;transition:background .35s,box-shadow .35s,padding .35s;
+  padding:18px 0;
+}
+.nav.scrolled{background:rgba(255,255,255,.96);box-shadow:0 6px 24px -16px rgba(0,36,63,.4);padding:12px 0;backdrop-filter:blur(10px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Fraunces';font-weight:600;font-size:22px;color:#fff;transition:color .35s}
+.nav.scrolled .logo{color:var(--blue-deep)}
+.logo-mark{
+  width:42px;height:42px;border-radius:12px;flex:none;
+  background:linear-gradient(135deg,var(--orange),var(--orange-soft));
+  display:grid;place-items:center;box-shadow:0 8px 18px -8px rgba(254,127,4,.7);
+}
+.logo-mark svg{width:24px;height:24px}
+.logo small{display:block;font-family:'Plus Jakarta Sans';font-size:10px;letter-spacing:.28em;font-weight:600;text-transform:uppercase;opacity:.7;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{font-size:15px;font-weight:600;color:rgba(255,255,255,.92);transition:color .25s;position:relative}
+.nav.scrolled .nav-links a{color:var(--ink)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--orange);transition:width .25s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.burger{display:none;background:none;border:none;cursor:pointer;width:46px;height:46px;border-radius:12px}
+.burger span{display:block;width:24px;height:2.4px;background:#fff;margin:5px auto;border-radius:2px;transition:.3s}
+.nav.scrolled .burger span{background:var(--ink)}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;margin-top:-92px;padding-top:92px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:linear-gradient(135deg,var(--blue-deep),var(--blue-mid))}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.hero-veil{position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(100deg,rgba(0,36,63,.92) 0%,rgba(0,36,63,.6) 42%,rgba(0,36,63,.25) 100%),
+  linear-gradient(0deg,rgba(0,36,63,.7),transparent 45%);}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;width:100%;padding:60px 0}
+.hero-copy{color:#fff;max-width:560px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;letter-spacing:.04em;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);
+  padding:8px 16px;border-radius:60px;backdrop-filter:blur(6px);margin-bottom:24px;
+}
+.hero-badge .pip{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(254,127,4,.3)}
+.hero h1{font-size:clamp(40px,6vw,72px);font-weight:600;letter-spacing:-.02em;margin-bottom:22px}
+.hero p.lead{font-size:18.5px;color:rgba(255,255,255,.86);margin-bottom:34px;max-width:480px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+
+/* enquiry form card */
+.enquiry{
+  background:rgba(255,255,255,.97);border-radius:24px;padding:32px;box-shadow:var(--shadow);
+  border:1px solid rgba(255,255,255,.6);
+}
+.enquiry h3{font-size:23px;margin-bottom:4px}
+.enquiry .sub{font-size:14px;color:var(--muted);margin-bottom:22px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.field input,.field select{
+  width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:13px;
+  font-family:inherit;font-size:15.5px;color:var(--ink);background:var(--ivory);transition:border .2s,box-shadow .2s;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 4px rgba(254,127,4,.13);background:#fff}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+.form-success{
+  display:none;text-align:center;padding:30px 10px;
+}
+.form-success.show{display:block;animation:pop .5s cubic-bezier(.2,.8,.2,1)}
+.form-success .check{width:64px;height:64px;border-radius:50%;background:#e7f6ec;display:grid;place-items:center;margin:0 auto 16px}
+.form-success .check svg{width:34px;height:34px;color:#1f9d55}
+.form-success h3{color:var(--blue-deep)}
+.form-success p{color:var(--muted);font-size:15px;margin-top:6px}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+
+/* paper planes */
+.plane{position:absolute;color:rgba(255,255,255,.5);z-index:-1;animation:drift linear infinite}
+.plane svg{width:100%;height:100%}
+@keyframes drift{
+  0%{transform:translate(-12vw,18vh) rotate(8deg);opacity:0}
+  10%{opacity:.55}
+  90%{opacity:.4}
+  100%{transform:translate(115vw,-12vh) rotate(14deg);opacity:0}
+}
+
+/* DEPARTURE BOARD */
+.board-section{background:var(--blue-deep);color:#fff;padding:78px 0;position:relative;overflow:hidden}
+.board-section::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% -10%,rgba(254,127,4,.16),transparent 55%);pointer-events:none}
+.board-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px;flex-wrap:wrap}
+.board-head .sec-title{color:#fff}
+.board-head .sec-lead{color:rgba(255,255,255,.7)}
+.board-head .eyebrow{color:var(--orange-soft)}
+.board{
+  background:linear-gradient(180deg,#06121f,#0a1b2c);
+  border-radius:20px;border:1px solid rgba(255,255,255,.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 30px 60px -30px rgba(0,0,0,.7);
+  overflow:hidden;
+}
+.board-top{display:flex;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.09);font-family:'Space Mono';font-size:12px;letter-spacing:.2em;color:rgba(255,255,255,.55);text-transform:uppercase}
+.board-top .live{display:inline-flex;align-items:center;gap:7px;color:var(--orange-soft)}
+.board-top .live .pip{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.board-scroll{overflow-x:auto}
+.board-row{
+  display:grid;grid-template-columns:1.6fr 36px 2.2fr 1fr 1.5fr;gap:14px;align-items:center;
+  padding:15px 22px;border-bottom:1px solid rgba(255,255,255,.05);min-width:680px;
+}
+.board-row:last-child{border-bottom:none}
+.board-row .arrow{color:var(--orange-soft);text-align:center;font-size:18px}
+.flap{display:flex;gap:3px}
+.flap-tile{
+  font-family:'Space Mono';font-weight:700;font-size:21px;
+  background:#13283c;color:#ffd9a8;border-radius:4px;
+  width:23px;height:34px;display:grid;place-items:center;position:relative;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.5);
+}
+.flap-tile::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.55);transform:translateY(-.5px)}
+.flap-tile.flipping{animation:flip .12s linear}
+@keyframes flip{0%{transform:rotateX(0)}50%{transform:rotateX(-55deg)}100%{transform:rotateX(0)}}
+.board-orig{font-family:'Space Mono';font-weight:700;font-size:15px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:8px}
+.board-orig .code{background:rgba(255,255,255,.1);padding:3px 8px;border-radius:5px;font-size:13px}
+.board-flight{font-family:'Space Mono';font-size:15px;color:rgba(255,255,255,.65)}
+.status{font-family:'Space Mono';font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:30px;display:inline-block}
+.st-board{background:rgba(31,157,85,.18);color:#5fd99a}
+.st-time{background:rgba(254,127,4,.16);color:var(--orange-soft)}
+.st-check{background:rgba(26,120,194,.2);color:#7bc0ef}
+
+/* DESTINATIONS */
+.dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.dest-grid .span2{grid-column:span 2}
+.flip{perspective:1400px;height:340px}
+.flip.tall{height:430px}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;border-radius:20px}
+.flip:hover .flip-inner,.flip:focus-within .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.flip-front .ph,.flip-front img{width:100%;height:100%;object-fit:cover}
+.flip-front .grad{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,36,63,.85) 0%,rgba(0,36,63,.1) 50%,transparent 100%)}
+.flip-front .label{position:absolute;left:22px;right:22px;bottom:20px;color:#fff}
+.flip-front .label .city{font-family:'Fraunces';font-size:28px;font-weight:600;line-height:1}
+.flip-front .label .country{font-size:13px;opacity:.82;margin-top:5px;letter-spacing:.03em}
+.flip-front .hint{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.92);color:var(--blue);font-size:11px;font-weight:700;padding:6px 12px;border-radius:30px;display:flex;align-items:center;gap:5px}
+.flip-back{
+  background:linear-gradient(150deg,var(--blue),var(--blue-mid));color:#fff;
+  transform:rotateY(180deg);padding:28px;display:flex;flex-direction:column;
+}
+.flip-back .bcity{font-family:'Fraunces';font-size:25px;margin-bottom:4px}
+.flip-back .meta{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
+.flip-back .chip{font-size:12px;font-weight:600;background:rgba(255,255,255,.15);padding:5px 11px;border-radius:30px}
+.flip-back ul{list-style:none;margin-bottom:auto}
+.flip-back li{font-size:14px;padding:5px 0;padding-left:22px;position:relative;color:rgba(255,255,255,.92)}
+.flip-back li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.flip-back .price{font-size:13px;color:rgba(255,255,255,.75);margin-top:14px}
+.flip-back .price b{display:block;font-family:'Fraunces';font-size:24px;color:#fff;font-weight:600}
+
+/* MOOD */
+.mood-section{background:var(--sand)}
+.mood-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.mood{position:relative;height:420px;border-radius:22px;overflow:hidden;cursor:pointer}
+.mood .ph,.mood img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.mood:hover img,.mood:hover .ph{transform:scale(1.08)}
+.mood .grad{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,36,63,.9) 5%,rgba(0,36,63,.2) 55%,rgba(0,36,63,.35) 100%)}
+.mood .txt{position:absolute;left:24px;right:24px;bottom:26px;color:#fff;transition:transform .5s}
+.mood .ic{width:46px;height:46px;border-radius:13px;background:rgba(254,127,4,.92);display:grid;place-items:center;margin-bottom:16px}
+.mood .ic svg{width:24px;height:24px;color:#fff}
+.mood h3{font-size:25px;font-weight:600;margin-bottom:6px}
+.mood p{font-size:14.5px;color:rgba(255,255,255,.86);max-height:0;opacity:0;overflow:hidden;transition:max-height .5s,opacity .5s}
+.mood:hover p{max-height:80px;opacity:1}
+
+/* SERVICES */
+.serv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.serv{
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 26px;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.serv:hover{transform:translateY(-6px);box-shadow:var(--shadow-sm);border-color:transparent}
+.serv .ic{width:54px;height:54px;border-radius:15px;background:linear-gradient(135deg,rgba(0,87,152,.1),rgba(254,127,4,.12));display:grid;place-items:center;margin-bottom:18px}
+.serv .ic svg{width:27px;height:27px;color:var(--blue)}
+.serv:hover .ic{background:var(--orange)}
+.serv:hover .ic svg{color:#fff}
+.serv h3{font-size:19px;margin-bottom:8px}
+.serv p{font-size:14.5px;color:var(--muted)}
+
+/* TRUST STRIP */
+.trust{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;padding-top:48px;padding-bottom:48px}
+.trust-item{text-align:center}
+.trust-item .seal{margin:0 auto 12px}
+.trust-num{font-family:'Fraunces';font-size:46px;font-weight:600;color:var(--blue);line-height:1}
+.trust-num .plus{color:var(--orange)}
+.trust-lab{font-size:14px;color:var(--muted);margin-top:6px;font-weight:600;letter-spacing:.02em}
+.iata-seal{width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-mid));display:grid;place-items:center;color:#fff;margin:0 auto 12px;box-shadow:0 12px 26px -12px rgba(0,87,152,.7);position:relative}
+.iata-seal::before{content:"";position:absolute;inset:5px;border:1.5px dashed rgba(255,255,255,.45);border-radius:50%}
+.iata-seal b{font-family:'Fraunces';font-size:18px;font-weight:700}
+
+/* PACKAGES */
+.pkg-section{background:var(--blue-deep);color:#fff;position:relative;overflow:hidden}
+.pkg-section::before{content:"";position:absolute;top:-20%;left:-10%;width:50%;height:80%;background:radial-gradient(circle,rgba(254,127,4,.12),transparent 70%)}
+.pkg-section .eyebrow{color:var(--orange-soft)}
+.pkg-section .sec-title{color:#fff}
+.pkg-section .sec-lead{color:rgba(255,255,255,.7)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
+.pkg{background:#fff;color:var(--ink);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);transition:transform .3s}
+.pkg:hover{transform:translateY(-8px)}
+.pkg-img{position:relative;height:208px}
+.pkg-img .ph,.pkg-img img{width:100%;height:100%;object-fit:cover}
+.pkg-tag{position:absolute;top:16px;left:16px;background:var(--orange);color:#fff;font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:30px;box-shadow:0 8px 18px -8px rgba(254,127,4,.7)}
+.pkg-body{padding:26px}
+.pkg-body h3{font-size:24px;margin-bottom:4px}
+.pkg-dur{font-size:13.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:7px;margin-bottom:16px}
+.pkg-body ul{list-style:none;margin-bottom:22px}
+.pkg-body li{font-size:14.5px;padding:6px 0 6px 26px;position:relative;color:#33424f}
+.pkg-body li svg{position:absolute;left:0;top:9px;width:16px;height:16px;color:var(--orange)}
+.pkg-price{display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid var(--line);padding-top:18px}
+.pkg-price .from{font-size:12px;color:var(--muted)}
+.pkg-price .amt{font-family:'Fraunces';font-size:25px;font-weight:600;color:var(--blue);line-height:1.1}
+
+/* INTERACTIVE GLOBE */
+.map-section{background:var(--ivory)}
+.globe-stage{position:relative;width:100%;max-width:940px;height:clamp(380px,56vw,560px);margin:24px auto 0;border-radius:28px;overflow:hidden;
+  background:radial-gradient(circle at 50% 38%,#dce8f5 0%,#c8dded 45%,#b8d0e8 100%);
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.7);cursor:grab;touch-action:none;
+  border:1px solid rgba(0,87,152,.12)}
+.globe-stage:active{cursor:grabbing}
+.globe-stage canvas{display:block;width:100%;height:100%}
+.globe-stage::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:28px;box-shadow:inset 0 0 80px 10px rgba(184,208,232,.4)}
+.globe-hint{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:var(--blue-deep);background:rgba(255,255,255,.75);border:1px solid rgba(0,87,152,.22);
+  padding:8px 16px;border-radius:60px;backdrop-filter:blur(6px);transition:opacity .6s;pointer-events:none;white-space:nowrap}
+.globe-hint.hide{opacity:0}
+.globe-tip{position:absolute;z-index:4;pointer-events:none;transform:translate(-50%,-145%);background:#fff;color:var(--blue-deep);
+  font-size:13px;font-weight:700;padding:6px 12px;border-radius:30px;box-shadow:var(--shadow-sm);white-space:nowrap;opacity:0;transition:opacity .18s}
+.globe-tip.show{opacity:1}
+.globe-tip b{color:var(--orange)}
+.globe-tip::after{content:"";position:absolute;left:50%;bottom:-4px;transform:translateX(-50%) rotate(45deg);width:9px;height:9px;background:#fff}
+/* flat-map fallback (used only if WebGL/Three.js unavailable) */
+.map-fallback{position:absolute;inset:0;display:grid;place-items:center}
+.map-fallback svg{width:94%;height:94%;overflow:visible}
+.flight-path{fill:none;stroke:var(--blue-glow);stroke-width:1.6;stroke-dasharray:5 6;opacity:.6;animation:dash 22s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-220}}
+.node{fill:#fff;stroke:var(--blue-glow);stroke-width:2.5}
+.node-orig{fill:var(--orange);stroke:#fff;stroke-width:3}
+.node-pulse{fill:var(--orange);opacity:.5;animation:nodepulse 2.4s ease-out infinite}
+@keyframes nodepulse{0%{r:9;opacity:.5}100%{r:30;opacity:0}}
+.node-lab{font-family:'Plus Jakarta Sans';font-size:13px;font-weight:700;fill:#fff}
+.node-lab.orig{fill:var(--orange-soft)}
+.fly-plane{fill:var(--orange)}
+.map-legend{text-align:center;margin-top:22px;font-size:14px;color:var(--muted)}
+
+/* TESTIMONIALS */
+.test-section{background:var(--sand)}
+.test{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);min-height:380px}
+.test-photo{position:relative}
+.test-photo .ph,.test-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.test-body{padding:46px}
+.test-quote-mark{font-family:'Fraunces';font-size:80px;line-height:.6;color:var(--orange);height:42px}
+.test-text{font-family:'Fraunces';font-size:21px;line-height:1.55;color:var(--blue-deep);font-weight:400;margin:6px 0 26px}
+.test-author{display:flex;align-items:center;gap:14px}
+.test-avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--sand)}
+.test-author .nm{font-weight:700;font-size:16px}
+.test-author .loc{font-size:13.5px;color:var(--muted)}
+.test-stars{color:var(--orange);font-size:15px;margin-top:3px;letter-spacing:2px}
+.test-dots{display:flex;gap:9px;justify-content:center;margin-top:28px}
+.test-dots button{width:10px;height:10px;border-radius:50%;border:none;background:rgba(0,87,152,.22);cursor:pointer;transition:.25s;padding:0}
+.test-dots button.active{background:var(--orange);width:28px;border-radius:6px}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.member{text-align:center}
+.member-photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/3.4;margin-bottom:16px}
+.member-photo .ph,.member-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.member:hover .member-photo img,.member:hover .member-photo .ph{transform:scale(1.06)}
+.member-photo .ring{position:absolute;inset:0;border:3px solid transparent;border-radius:20px;transition:border-color .3s}
+.member:hover .member-photo .ring{border-color:var(--orange)}
+.member h3{font-size:20px;margin-bottom:3px}
+.member .role{font-size:14px;color:var(--orange);font-weight:700;letter-spacing:.02em}
+.member p{font-size:13.5px;color:var(--muted);margin-top:8px}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-imgs{position:relative;height:480px}
+.about-imgs .a1{position:absolute;top:0;left:0;width:72%;height:64%;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);z-index:2}
+.about-imgs .a2{position:absolute;bottom:0;right:0;width:60%;height:56%;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:6px solid var(--ivory)}
+.about-imgs .ph,.about-imgs img{width:100%;height:100%;object-fit:cover}
+.about-imgs .stamp{position:absolute;bottom:18px;left:8px;z-index:3;width:118px;height:118px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 16px 34px -14px rgba(254,127,4,.8);transform:rotate(-8deg)}
+.about-imgs .stamp b{font-family:'Fraunces';font-size:34px;display:block;line-height:1}
+.about-imgs .stamp span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.about-feats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.about-feat{display:flex;gap:13px;align-items:flex-start}
+.about-feat .ic{width:42px;height:42px;flex:none;border-radius:12px;background:rgba(0,87,152,.09);display:grid;place-items:center}
+.about-feat .ic svg{width:21px;height:21px;color:var(--blue)}
+.about-feat b{font-size:15px;display:block}
+.about-feat span{font-size:13px;color:var(--muted)}
+
+/* NEWSLETTER */
+.news-section{padding:0}
+.news{background:linear-gradient(135deg,var(--blue),var(--blue-mid));border-radius:28px;padding:60px;color:#fff;position:relative;overflow:hidden;text-align:center}
+.news::before{content:"";position:absolute;top:-40%;right:-5%;width:40%;height:160%;background:radial-gradient(circle,rgba(254,127,4,.22),transparent 65%)}
+.news .ic-plane{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.14);display:grid;place-items:center;margin:0 auto 20px}
+.news .ic-plane svg{width:28px;height:28px;color:var(--orange-soft)}
+.news h2{font-size:clamp(28px,4vw,42px);color:#fff;margin-bottom:12px}
+.news p{color:rgba(255,255,255,.82);max-width:480px;margin:0 auto 28px;font-size:16px}
+.news-form{display:flex;gap:12px;max-width:480px;margin:0 auto;position:relative;z-index:2}
+.news-form input{flex:1;padding:16px 20px;border-radius:60px;border:none;font-family:inherit;font-size:15.5px}
+.news-form input:focus{outline:none;box-shadow:0 0 0 4px rgba(254,127,4,.4)}
+.news-ok{display:none;margin-top:16px;color:var(--orange-soft);font-weight:700}
+.news-ok.show{display:block;animation:pop .4s}
+
+/* CONTACT */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.contact-card{display:flex;gap:16px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line)}
+.contact-card:last-of-type{border-bottom:none}
+.contact-card .ic{width:50px;height:50px;flex:none;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--blue-mid));display:grid;place-items:center}
+.contact-card .ic svg{width:23px;height:23px;color:#fff}
+.contact-card b{font-size:13px;color:var(--orange);text-transform:uppercase;letter-spacing:.08em}
+.contact-card p{font-size:16.5px;font-weight:600;color:var(--ink);margin-top:2px}
+.contact-card p a:hover{color:var(--orange)}
+.contact-wa{background:#25D366;color:#fff;border-radius:24px;padding:40px;text-align:center;box-shadow:0 24px 50px -24px rgba(37,211,102,.6)}
+.contact-wa .wa-ic{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;margin:0 auto 20px}
+.contact-wa .wa-ic svg{width:40px;height:40px;color:#fff}
+.contact-wa h3{color:#fff;font-size:27px;margin-bottom:8px}
+.contact-wa p{color:rgba(255,255,255,.92);font-size:15.5px;margin-bottom:24px}
+.contact-wa .btn{background:#fff;color:#1aa856}
+.contact-wa .btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(0,0,0,.3)}
+
+/* FOOTER */
+.footer{background:var(--blue-deep);color:rgba(255,255,255,.7);padding:72px 0 32px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.1)}
+.foot-logo{color:#fff;margin-bottom:16px}
+.foot-about{font-size:14.5px;line-height:1.7;max-width:300px}
+.foot-iata{display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:rgba(255,255,255,.07);padding:9px 16px;border-radius:12px;font-size:13px;color:#fff}
+.foot-iata b{color:var(--orange-soft)}
+.foot-col h4{color:#fff;font-size:16px;margin-bottom:18px}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:11px}
+.foot-col a{font-size:14.5px;transition:color .2s}
+.foot-col a:hover{color:var(--orange-soft)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;font-size:13.5px;flex-wrap:wrap;gap:12px}
+.foot-bottom .socials{display:flex;gap:12px}
+.foot-bottom .socials a{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:.25s}
+.foot-bottom .socials a:hover{background:var(--orange);color:#fff;transform:translateY(-3px)}
+.foot-bottom .socials svg{width:18px;height:18px}
+
+/* FLOATING WHATSAPP */
+.wa-float{position:fixed;right:24px;bottom:24px;z-index:200;width:62px;height:62px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 14px 32px -8px rgba(37,211,102,.7);transition:transform .25s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:34px;height:34px;color:#fff}
+.wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;background:#25D366;z-index:-1;animation:wapulse 2s ease-out infinite}
+@keyframes wapulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.8);opacity:0}}
+.wa-tip{position:fixed;right:96px;bottom:42px;z-index:200;background:#fff;color:var(--ink);font-size:13.5px;font-weight:600;padding:9px 15px;border-radius:30px;box-shadow:var(--shadow-sm);white-space:nowrap;opacity:0;transform:translateX(10px);transition:.3s;pointer-events:none}
+.wa-float:hover + .wa-tip,.wa-tip.show{opacity:1;transform:translateX(0)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+/* MOBILE */
+@media(max-width:1080px){
+  .dest-grid,.mood-grid,.serv-grid,.team-grid,.trust .wrap{grid-template-columns:repeat(2,1fr)}
+  .dest-grid .span2{grid-column:span 2}
+}
+@media(max-width:880px){
+  .section{padding:74px 0}
+  .nav-links,.nav-cta .btn{display:none}
+  .burger{display:block}
+  .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#fff;padding:20px 26px;gap:18px;box-shadow:var(--shadow-sm);align-items:flex-start}
+  .nav-links.open a{color:var(--ink)}
+  .hero-inner{grid-template-columns:1fr;gap:36px}
+  .hero{min-height:auto;padding-bottom:48px}
+  .pkg-grid,.about,.contact,.test{grid-template-columns:1fr}
+  .test-photo{height:240px}
+  .about-imgs{height:380px}
+  .news{padding:40px 26px}
+  .news-form{flex-direction:column}
+  .news-form input,.news-form .btn{width:100%}
+}
+@media(max-width:560px){
+  .dest-grid,.mood-grid,.serv-grid,.team-grid,.trust .wrap,.about-feats{grid-template-columns:1fr}
+  .dest-grid .span2{grid-column:span 1}
+  .field-row{grid-template-columns:1fr}
+  .hero h1{font-size:38px}
+  .wrap{padding:0 18px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  ✈️ Certification <b>IATA</b> <span class="dot">•</span> Votre spécialiste voyage depuis <b>2009</b> <span class="dot">•</span> Devis gratuit sous 24h
+</div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="Hariom Travels accueil">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5Z" fill="#fff"/></svg></span>
+      <span>Hariom Travels<small>Pointe-Noire · Congo</small></span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#ambiances">Ambiances</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#forfaits">Forfaits</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#enquiry" class="btn btn-primary">Devis gratuit</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><img id="heroImg" alt="Vue panoramique de Dubaï au coucher du soleil"></div>
+  <div class="hero-veil"></div>
+  <!-- drifting paper planes -->
+  <div class="plane" style="width:42px;height:42px;top:0;animation-duration:26s;animation-delay:0s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></div>
+  <div class="plane" style="width:28px;height:28px;top:0;animation-duration:34s;animation-delay:8s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></div>
+  <div class="plane" style="width:34px;height:34px;top:0;animation-duration:30s;animation-delay:16s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy reveal">
+      <span class="hero-badge"><span class="pip"></span> Agence certifiée IATA · 15 000+ voyageurs accompagnés</span>
+      <h1>Le monde est à votre <span class="it">portée</span>.</h1>
+      <p class="lead">Depuis Pointe-Noire, nous transformons vos rêves de voyage en réalité — Dubaï, Paris, Singapour et bien au-delà. Vols, hôtels, visa, tout est organisé pour vous.</p>
+      <div class="hero-actions">
+        <a href="#enquiry" class="btn btn-primary btn-lg">Planifier mon voyage</a>
+        <a href="#destinations" class="btn btn-ghost btn-lg">Voir les destinations</a>
+      </div>
+    </div>
+    <div id="enquiry">
+      <div class="enquiry reveal d1">
+        <div id="enquiryForm">
+          <h3>Demandez votre <span class="it-light">devis gratuit</span></h3>
+          <p class="sub">Réponse personnalisée sous 24h, sans engagement.</p>
+          <div class="field">
+            <label for="f-dest">Destination</label>
+            <select id="f-dest">
+              <option>Dubaï</option><option>Paris</option><option>Singapour</option>
+              <option>Istanbul</option><option>Bangkok</option><option>Île Maurice</option>
+              <option>Londres</option><option>Afrique du Sud</option><option>Autre / Je ne sais pas encore</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="f-date">Date de départ</label><input type="date" id="f-date"></div>
+            <div class="field"><label for="f-pax">Voyageurs</label>
+              <select id="f-pax"><option>1 personne</option><option>2 personnes</option><option>3 personnes</option><option>4 personnes</option><option>5+ personnes / Groupe</option></select>
+            </div>
+          </div>
+          <div class="field"><label for="f-tel">Votre téléphone</label><input type="tel" id="f-tel" placeholder="+242 06 000 0000"></div>
+          <button class="btn btn-primary btn-block btn-lg" id="enquirySubmit">Recevoir mon devis gratuit</button>
+          <p class="form-note">🔒 Vos informations restent confidentielles.</p>
+        </div>
+        <div class="form-success" id="enquirySuccess">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Merci !</h3>
+          <p>Nous vous contacterons très bientôt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-item reveal">
+      <div class="iata-seal"><b>IATA</b></div>
+      <div class="trust-lab">Agence certifiée &<br>accréditée</div>
+    </div>
+    <div class="trust-item reveal d1">
+      <div class="trust-num" data-count="16"><span class="plus">+</span></div>
+      <div class="trust-lab">Années d'expertise<br>depuis 2009</div>
+    </div>
+    <div class="trust-item reveal d2">
+      <div class="trust-num" data-count="15000"><span class="plus">+</span></div>
+      <div class="trust-lab">Voyageurs<br>accompagnés</div>
+    </div>
+    <div class="trust-item reveal d3">
+      <div class="trust-num">24/7</div>
+      <div class="trust-lab">Assistance<br>à vos côtés</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPARTURE BOARD (signature) -->
+<section class="board-section" id="board">
+  <div class="wrap">
+    <div class="board-head reveal">
+      <div>
+        <span class="eyebrow">Au départ de Pointe-Noire</span>
+        <h2 class="sec-title">Prochains <span class="it">embarquements</span></h2>
+        <p class="sec-lead">Où que vous rêviez d'aller, nous y allons. Voici un aperçu de notre tableau des départs.</p>
+      </div>
+    </div>
+    <div class="board reveal d1">
+      <div class="board-top">
+        <span>Tableau des départs · Hariom Travels</span>
+        <span class="live"><span class="pip"></span> EN DIRECT</span>
+      </div>
+      <div class="board-scroll"><div id="boardRows"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR DESTINATIONS -->
+<section class="section" id="destinations">
+  <div class="wrap">
+    <div class="head-center reveal">
+      <span class="eyebrow center">Destinations</span>
+      <h2 class="sec-title">Nos destinations les plus <span class="it">prisées</span></h2>
+      <p class="sec-lead">Survolez une carte pour découvrir l'offre. Chaque destination, pensée pour les voyageurs congolais.</p>
+    </div>
+    <div class="dest-grid" id="destGrid"></div>
+  </div>
+</section>
+
+<!-- TRAVEL BY MOOD -->
+<section class="section mood-section" id="ambiances">
+  <div class="wrap">
+    <div class="head-center reveal">
+      <span class="eyebrow center">Pourquoi voyager</span>
+      <h2 class="sec-title">Quel voyageur <span class="it">êtes-vous</span> ?</h2>
+      <p class="sec-lead">On ne voyage pas pour les mêmes raisons. Dites-nous votre envie, nous créons le voyage.</p>
+    </div>
+    <div class="mood-grid">
+      <div class="mood reveal" data-img="famille"><div class="grad"></div><div class="txt"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>En famille</h3><p>Des souvenirs pour toute la tribu, des plus petits aux grands-parents.</p></div></div>
+      <div class="mood reveal d1" data-img="amoureux"><div class="grad"></div><div class="txt"><div class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-8-4.5-8-10a4.5 4.5 0 0 1 8-2.9A4.5 4.5 0 0 1 20 11c0 5.5-8 10-8 10z"/></svg></div><h3>En amoureux</h3><p>À deux, loin du monde. Lunes de miel et escapades romantiques.</p></div></div>
+      <div class="mood reveal d2" data-img="affaires"><div class="grad"></div><div class="txt"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h3>Voyage d'affaires</h3><p>Voyagez l'esprit tranquille. Logistique, MICE et événements pro.</p></div></div>
+      <div class="mood reveal d3" data-img="aventure"><div class="grad"></div><div class="txt"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div><h3>Aventure & Découverte</h3><p>Sortez des sentiers battus. Safaris, treks et grands espaces.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="head-center reveal">
+      <span class="eyebrow center">Nos services</span>
+      <h2 class="sec-title">Tout votre voyage, <span class="it">simplifié</span></h2>
+      <p class="sec-lead">De la première idée jusqu'à votre retour, nous nous occupons de chaque détail.</p>
+    </div>
+    <div class="serv-grid" id="servGrid"></div>
+  </div>
+</section>
+
+<!-- FEATURED PACKAGES -->
+<section class="section pkg-section" id="forfaits">
+  <div class="wrap">
+    <div class="head-center reveal">
+      <span class="eyebrow center">Forfaits du moment</span>
+      <h2 class="sec-title">Des voyages clés en main, <span class="it">prêts à partir</span></h2>
+      <p class="sec-lead">Vols, hébergement et expériences inclus. Il ne vous reste qu'à faire vos valises.</p>
+    </div>
+    <div class="pkg-grid" id="pkgGrid"></div>
+  </div>
+</section>
+
+<!-- NETWORK MAP -->
+<section class="section map-section">
+  <div class="wrap">
+    <div class="head-center reveal">
+      <span class="eyebrow center">Notre réseau</span>
+      <h2 class="sec-title">Depuis le Congo, vers le <span class="it">monde entier</span></h2>
+      <p class="sec-lead">Une seule agence, des dizaines de destinations. Voici jusqu'où nous vous emmenons.</p>
+    </div>
+    <div class="globe-stage reveal d1" id="globeStage" role="img" aria-label="Globe interactif montrant les liaisons Hariom Travels depuis Pointe-Noire vers le monde entier">
+      <div class="globe-hint" id="globeHint">✦ Glissez pour faire tourner le globe</div>
+      <div class="globe-tip" id="globeTip"></div>
+    </div>
+    <p class="map-legend reveal">Pointe-Noire <span style="color:var(--orange);font-weight:700">●</span> notre point de départ vers chaque continent.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section test-section">
+  <div class="wrap">
+    <div class="head-center reveal">
+      <span class="eyebrow center">Ils nous font confiance</span>
+      <h2 class="sec-title">Des voyages qui laissent des <span class="it">souvenirs</span></h2>
+    </div>
+    <div class="reveal d1">
+      <div class="test" id="testCard"></div>
+      <div class="test-dots" id="testDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section" id="equipe">
+  <div class="wrap">
+    <div class="head-center reveal">
+      <span class="eyebrow center">Notre équipe</span>
+      <h2 class="sec-title">Des visages, pas seulement des <span class="it">guichets</span></h2>
+      <p class="sec-lead">Une équipe passionnée, qui connaît vos destinations et parle votre langue.</p>
+    </div>
+    <div class="team-grid" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section mood-section" id="apropos">
+  <div class="wrap about">
+    <div class="reveal">
+      <span class="eyebrow">À propos de nous</span>
+      <h2 class="sec-title">Pionniers du voyage international au <span class="it">Congo</span></h2>
+      <p class="sec-lead" style="margin-bottom:18px">Fondée en 2009 à Pointe-Noire, Hariom Travels a ouvert le monde à des milliers de familles, couples et professionnels congolais. Notre certification IATA est notre promesse : des voyages sûrs, fiables et organisés dans les règles de l'art.</p>
+      <p style="color:var(--muted);font-size:16px">Notre mission est simple : rendre le voyage accessible, serein et inoubliable. Vous rêvez, nous organisons — du premier devis jusqu'à votre retour à la maison.</p>
+      <div class="about-feats">
+        <div class="about-feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div><div><b>Certifiée IATA</b><span>Garantie de sérieux</span></div></div>
+        <div class="about-feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><b>Réponse sous 24h</b><span>Devis gratuit</span></div></div>
+        <div class="about-feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><b>Conseil en français</b><span>Une équipe locale</span></div></div>
+        <div class="about-feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div><b>15 000+ clients</b><span>Heureux & fidèles</span></div></div>
+      </div>
+    </div>
+    <div class="about-imgs reveal d1">
+      <div class="a1"><div class="ph" data-img="about1"></div></div>
+      <div class="a2"><div class="ph" data-img="about2"></div></div>
+      <div class="stamp"><div><b>2009</b><span>Depuis</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section news-section">
+  <div class="wrap">
+    <div class="news reveal">
+      <div class="ic-plane"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></div>
+      <h2>Recevez nos meilleures <span class="it">offres</span></h2>
+      <p>Inspirations voyage, promotions exclusives et bons plans — directement dans votre boîte mail. Une à deux fois par mois, jamais plus.</p>
+      <div class="news-form">
+        <input type="email" id="newsEmail" placeholder="Votre adresse e-mail" aria-label="Adresse e-mail">
+        <button class="btn btn-primary" id="newsBtn">S'inscrire</button>
+      </div>
+      <div class="news-ok" id="newsOk">🎉 Merci ! Vous êtes bien inscrit(e).</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="wrap contact">
+    <div class="reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 class="sec-title">Parlons de votre <span class="it">prochain voyage</span></h2>
+      <p class="sec-lead" style="margin-bottom:24px">Passez nous voir, écrivez-nous ou envoyez un message WhatsApp. Nous adorons aider.</p>
+      <div class="contact-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><b>Adresse</b><p>Av. Charles de Gaulle, Immeuble ex-Air Gabon,<br>Pointe-Noire, Congo</p></div>
+      </div>
+      <div class="contact-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" fill="none"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+        <div><b>E-mail</b><p><a href="mailto:salespnr@hariomtravels.com">salespnr@hariomtravels.com</a></p></div>
+      </div>
+      <div class="contact-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><b>Téléphone & WhatsApp</b><p><a href="tel:+242060000000">+242 06 000 0000</a></p></div>
+      </div>
+    </div>
+    <div class="contact-wa reveal d1">
+      <div class="wa-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.13c-.24.68-1.4 1.3-1.94 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.94-4.36-.15-.19-1.18-1.57-1.18-2.99s.74-2.12 1.01-2.41c.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.17-.29.37-.42.5-.14.14-.28.28-.12.56.16.27.71 1.17 1.52 1.9 1.05.93 1.93 1.22 2.21 1.36.27.14.43.12.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.58.74 1.85.88.27.13.45.2.51.31.07.11.07.62-.17 1.3z"/></svg></div>
+      <h3>Écrivez-nous sur WhatsApp</h3>
+      <p>La façon la plus rapide d'obtenir une réponse. Notre équipe vous répond en quelques minutes.</p>
+      <a href="#" class="btn btn-lg" id="waContact">Démarrer la conversation</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo foot-logo"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5Z" fill="#fff"/></svg></span><span>Hariom Travels</span></a>
+        <p class="foot-about">Votre spécialiste voyage à Pointe-Noire depuis 2009. Nous ouvrons le monde aux voyageurs congolais, avec sérieux et passion.</p>
+        <div class="foot-iata"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange-soft)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>Agence accréditée <b>IATA</b></div>
+      </div>
+      <div class="foot-col">
+        <h4>Destinations</h4>
+        <ul><li><a href="#destinations">Dubaï</a></li><li><a href="#destinations">Paris</a></li><li><a href="#destinations">Singapour</a></li><li><a href="#destinations">Istanbul</a></li><li><a href="#destinations">Île Maurice</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <ul><li><a href="#services">Forfaits vacances</a></li><li><a href="#services">Billets d'avion</a></li><li><a href="#services">Réservation d'hôtels</a></li><li><a href="#services">Assistance visa</a></li><li><a href="#services">Voyages d'affaires</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Nous trouver</h4>
+        <ul>
+          <li>Av. Charles de Gaulle</li>
+          <li>Immeuble ex-Air Gabon</li>
+          <li>Pointe-Noire, Congo</li>
+          <li><a href="mailto:salespnr@hariomtravels.com">salespnr@hariomtravels.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Hariom Travels. Tous droits réservés. Certifié IATA depuis 2009.</span>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="#" class="wa-float" id="waFloat" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.13c-.24.68-1.4 1.3-1.94 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.94-4.36-.15-.19-1.18-1.57-1.18-2.99s.74-2.12 1.01-2.41c.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.17-.29.37-.42.5-.14.14-.28.28-.12.56.16.27.71 1.17 1.52 1.9 1.05.93 1.93 1.22 2.21 1.36.27.14.43.12.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.58.74 1.85.88.27.13.45.2.51.31.07.11.07.62-.17 1.3z"/></svg></a>
+<span class="wa-tip" id="waTip">Une question ? Écrivez-nous ! 👋</span>
+
+<script>
+/* ============================================================
+   CONFIG — édite ces valeurs en un seul endroit
+   ============================================================ */
+const CONFIG = {
+  // Numéro WhatsApp au format international SANS le "+" ni espaces.
+  // Remplace par le vrai numéro Hariom Travels.
+  whatsappNumber: "242060000000",
+  whatsappMessage: "Bonjour Hariom Travels, je souhaite des informations sur un voyage."
+};
+
+/* IMAGES — remplace les URLs Unsplash par tes propres visuels libres de droits.
+   Si une image ne charge pas, un dégradé élégant aux couleurs de la marque s'affiche. */
+const IMG = {
+  hero:     "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80", // Dubai skyline
+  famille:  "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=900&q=80",
+  amoureux: "https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&w=900&q=80",
+  affaires: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80",
+  aventure: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=900&q=80",
+  about1:   "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80",
+  about2:   "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80"
+};
+
+/* DESTINATIONS */
+const DESTINATIONS = [
+  {city:"Dubaï", country:"Émirats Arabes Unis", img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80", dur:"4 jours · 3 nuits", price:"1 250 000 FCFA", hi:["Burj Khalifa & Dubai Mall","Safari dans le désert","Hôtel 4★ + petit-déjeuner"], big:true},
+  {city:"Paris", country:"France", img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80", dur:"6 jours · 5 nuits", price:"1 450 000 FCFA", hi:["Tour Eiffel & Louvre","Croisière sur la Seine","Shopping Champs-Élysées"]},
+  {city:"Singapour", country:"Singapour", img:"https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=900&q=80", dur:"5 nuits", price:"1 680 000 FCFA", hi:["Gardens by the Bay","Marina Bay Sands","Île de Sentosa"]},
+  {city:"Istanbul", country:"Turquie", img:"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=900&q=80", dur:"5 jours · 4 nuits", price:"980 000 FCFA", hi:["Sainte-Sophie & Bosphore","Grand Bazar","Croisière au coucher du soleil"]},
+  {city:"Bangkok", country:"Thaïlande", img:"https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=900&q=80", dur:"6 nuits", price:"1 320 000 FCFA", hi:["Temples & Grand Palais","Marchés flottants","Escapade plage"]},
+  {city:"Île Maurice", country:"Océan Indien", img:"https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?auto=format&fit=crop&w=900&q=80", dur:"7 nuits", price:"1 590 000 FCFA", hi:["Plages paradisiaques","Resort tout-inclus","Lagon & plongée"]},
+  {city:"Londres", country:"Royaume-Uni", img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=900&q=80", dur:"5 jours · 4 nuits", price:"1 520 000 FCFA", hi:["Big Ben & London Eye","Buckingham Palace","Musées gratuits"]},
+  {city:"Afrique du Sud", country:"Le Cap & Safari", img:"https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=900&q=80", dur:"7 nuits", price:"1 740 000 FCFA", hi:["Safari Big Five","Le Cap & Table Mountain","Route des vins"]}
+];
+
+/* BOARD destinations cycle */
+const BOARD_DESTS = [
+  {code:"DXB", city:"DUBAI", flight:"HW 204"},
+  {code:"CDG", city:"PARIS", flight:"HW 118"},
+  {code:"SIN", city:"SINGAPOUR", flight:"HW 552"},
+  {code:"IST", city:"ISTANBUL", flight:"HW 330"},
+  {code:"BKK", city:"BANGKOK", flight:"HW 412"},
+  {code:"MRU", city:"MAURICE", flight:"HW 276"},
+  {code:"LHR", city:"LONDRES", flight:"HW 188"},
+  {code:"JNB", city:"LE CAP", flight:"HW 640"}
+];
+const STATUSES=[{t:"EMBARQUEMENT",c:"st-board"},{t:"À L'HEURE",c:"st-time"},{t:"ENREGISTREMENT",c:"st-check"}];
+
+/* SERVICES */
+const SERVICES=[
+  {t:"Forfaits vacances",d:"Des séjours complets clés en main, partout dans le monde.",i:'<path d="M3 7h18v13H3z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'},
+  {t:"Billetterie aérienne",d:"Les meilleurs tarifs sur toutes les compagnies, sans frais cachés.",i:'<path d="M2 21l21-9L2 3v7l15 2-15 2z"/>'},
+  {t:"Réservation d'hôtels",d:"Du confort 3★ au luxe 5★, sélectionnés et négociés pour vous.",i:'<path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/>'},
+  {t:"Assistance visa",d:"Dossiers, rendez-vous et démarches : on vous accompagne de A à Z.",i:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/>'},
+  {t:"Hôtesse d'aéroport",d:"Un accueil personnalisé pour un départ et une arrivée sereins.",i:'<circle cx="12" cy="8" r="4"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/>'},
+  {t:"Assurance voyage",d:"Voyagez l'esprit tranquille, couvert en toutes circonstances.",i:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'},
+  {t:"Voyages d'affaires & MICE",d:"Séminaires, congrès et déplacements pro organisés au cordeau.",i:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>'},
+  {t:"Conseil sur-mesure",d:"Un voyage unique ? Notre équipe le dessine avec vous.",i:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>'}
+];
+
+/* FEATURED PACKAGES */
+const PACKAGES=[
+  {city:"Dubaï",tag:"Le plus demandé",img:DESTINATIONS[0].img,dur:"4 jours · 3 nuits",price:"1 250 000 FCFA",hi:["Vols A/R + hôtel 4★","Safari dans le désert","Entrée Burj Khalifa"]},
+  {city:"Singapour",tag:"Nouveauté",img:DESTINATIONS[2].img,dur:"5 nuits",price:"1 680 000 FCFA",hi:["Gardens by the Bay","Marina Bay & Sentosa","Hôtel central + transferts"]},
+  {city:"Paris",tag:"Escapade romantique",img:DESTINATIONS[1].img,dur:"6 jours · 5 nuits",price:"1 450 000 FCFA",hi:["Tour Eiffel & Louvre","Croisière sur la Seine","Hôtel proche centre"]}
+];
+
+/* TESTIMONIALS */
+const TESTIMONIALS=[
+  {text:"Nous avions toujours rêvé d'emmener les enfants à Dubaï sans savoir par où commencer. L'équipe de Hariom a tout pris en main — les vols, l'hôtel, même une hôtesse à l'aéroport pour nous accueillir. Tout était parfait, du premier appel jusqu'à notre retour. C'est devenu notre agence pour la vie.",nm:"Brigitte M.",loc:"Pointe-Noire · Voyage à Dubaï",img:DESTINATIONS[0].img,av:"https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80"},
+  {text:"Pour notre lune de miel à l'île Maurice, je voulais que tout soit irréprochable. Hariom Travels a dépassé toutes nos attentes : un resort magnifique, des transferts sans stress et un budget parfaitement respecté. Ma femme en parle encore tous les jours. Merci infiniment.",nm:"Jean-Claude N.",loc:"Brazzaville · Lune de miel à Maurice",img:DESTINATIONS[5].img,av:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"},
+  {text:"En tant que chef d'entreprise, je voyage souvent et je n'ai pas de temps à perdre. Hariom gère mes déplacements professionnels avec un sérieux remarquable — billets modifiables, visas dans les délais, factures impeccables. Une équipe sur qui je peux vraiment compter.",nm:"Sandrine O.",loc:"Pointe-Noire · Voyage d'affaires",img:DESTINATIONS[6].img,av:"https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80"}
+];
+
+/* TEAM */
+const TEAM=[
+  {nm:"Hari Patel",role:"Directeur Général",d:"Fondateur, passionné de voyage depuis plus de 20 ans.",img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80"},
+  {nm:"Grace Mbemba",role:"Responsable Réservations",d:"Trouve toujours le meilleur tarif, sur tous les vols.",img:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80"},
+  {nm:"David Loemba",role:"Conseiller Voyages",d:"Votre guide pour des itinéraires sur-mesure.",img:"https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=500&q=80"},
+  {nm:"Aline Kimbembe",role:"Spécialiste Visa",d:"Maîtrise chaque démarche, pour un voyage sans souci.",img:"https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=500&q=80"}
+];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $=(s,el=document)=>el.querySelector(s);
+const $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const waLink=()=>`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(CONFIG.whatsappMessage)}`;
+
+// image with graceful gradient fallback
+function imgEl(src,alt){
+  return `<img src="${src}" alt="${alt}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('img-fail')">`;
+}
+// gradient fallback styling for .ph and failed images
+const style=document.createElement('style');
+style.textContent=`.ph,.img-fail{background:linear-gradient(135deg,var(--blue),var(--blue-mid))!important;position:relative}
+.ph::after,.img-fail::after{content:attr(data-name);position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85);font-family:'Fraunces';font-size:20px;text-align:center;padding:14px}`;
+document.head.appendChild(style);
+
+/* HERO image */
+(function(){const h=$('#heroImg');h.src=IMG.hero;h.onerror=()=>{h.style.display='none'};})();
+
+/* mood + about images */
+$$('[data-img]').forEach(el=>{
+  const key=el.dataset.img;
+  if(IMG[key]){
+    if(el.classList.contains('mood')){
+      const img=document.createElement('img');img.src=IMG[key];img.alt=key;img.loading='lazy';
+      img.onerror=()=>{const ph=document.createElement('div');ph.className='ph';ph.dataset.name=el.querySelector('h3')?.textContent||'';el.prepend(ph);img.remove();};
+      el.prepend(img);
+    } else { // .ph placeholders (about)
+      const img=document.createElement('img');img.src=IMG[key];img.alt=key;img.loading='lazy';
+      img.onerror=()=>{el.dataset.name='Hariom Travels';};
+      el.appendChild(img);
+    }
+  } else {el.dataset.name='Hariom Travels';}
+});
+
+/* ============================================================
+   DESTINATIONS (flip cards)
+   ============================================================ */
+(function(){
+  const grid=$('#destGrid');
+  DESTINATIONS.forEach((d,i)=>{
+    const card=document.createElement('div');
+    card.className='flip reveal'+(i%4===0?' span2 tall':'')+(' d'+(i%4));
+    card.tabIndex=0;
+    card.innerHTML=`
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          ${imgEl(d.img,d.city)}
+          <div class="grad"></div>
+          <span class="hint">↻ Détails</span>
+          <div class="label"><div class="city">${d.city}</div><div class="country">${d.country}</div></div>
+        </div>
+        <div class="flip-face flip-back">
+          <div class="bcity">${d.city}</div>
+          <div class="meta"><span class="chip">⏱ ${d.dur}</span></div>
+          <ul>${d.hi.map(h=>`<li>${h}</li>`).join('')}</ul>
+          <div class="price">À partir de <b>${d.price}</b></div>
+        </div>
+      </div>`;
+    // set fallback name on front image parent
+    card.querySelector('.flip-front').dataset.name=d.city;
+    grid.appendChild(card);
+  });
+})();
+
+/* SERVICES */
+(function(){
+  const g=$('#servGrid');
+  SERVICES.forEach((s,i)=>{
+    const el=document.createElement('div');
+    el.className='serv reveal d'+(i%4);
+    el.innerHTML=`<div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${s.i}</svg></div><h3>${s.t}</h3><p>${s.d}</p>`;
+    g.appendChild(el);
+  });
+})();
+
+/* PACKAGES */
+(function(){
+  const g=$('#pkgGrid');
+  PACKAGES.forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='pkg reveal d'+(i%3);
+    el.innerHTML=`
+      <div class="pkg-img" data-name="${p.city}">${imgEl(p.img,p.city)}<span class="pkg-tag">${p.tag}</span></div>
+      <div class="pkg-body">
+        <h3>${p.city}</h3>
+        <div class="pkg-dur"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ${p.dur}</div>
+        <ul>${p.hi.map(h=>`<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>${h}</li>`).join('')}</ul>
+        <div class="pkg-price"><div><div class="from">À partir de</div><div class="amt">${p.price}</div></div><a href="#enquiry" class="btn btn-primary">Réserver</a></div>
+      </div>`;
+    el.querySelector('.pkg-img').addEventListener('mouseenter',()=>{},{once:true});
+    g.appendChild(el);
+  });
+})();
+
+/* TESTIMONIALS carousel */
+(function(){
+  const card=$('#testCard'),dots=$('#testDots');let idx=0,timer;
+  function render(i){
+    const t=TESTIMONIALS[i];
+    card.innerHTML=`
+      <div class="test-photo" data-name="${t.loc.split('·').pop().trim()}">${imgEl(t.img,t.loc)}</div>
+      <div class="test-body">
+        <div class="test-quote-mark">&ldquo;</div>
+        <p class="test-text">${t.text}</p>
+        <div class="test-author">
+          <img class="test-avatar" src="${t.av}" alt="${t.nm}" onerror="this.style.background='var(--orange)';this.removeAttribute('src')">
+          <div><div class="nm">${t.nm}</div><div class="loc">${t.loc}</div><div class="test-stars">★★★★★</div></div>
+        </div>
+      </div>`;
+    $$('.test-photo').forEach(p=>p.dataset.name=t.loc.split('·').pop().trim());
+    $$('button',dots).forEach((b,bi)=>b.classList.toggle('active',bi===i));
+  }
+  TESTIMONIALS.forEach((_,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Avis '+(i+1));b.onclick=()=>{idx=i;render(idx);restart();};dots.appendChild(b);});
+  function next(){idx=(idx+1)%TESTIMONIALS.length;render(idx);}
+  function restart(){clearInterval(timer);timer=setInterval(next,7000);}
+  render(0);restart();
+})();
+
+/* TEAM */
+(function(){
+  const g=$('#teamGrid');
+  TEAM.forEach((m,i)=>{
+    const el=document.createElement('div');
+    el.className='member reveal d'+(i%4);
+    el.innerHTML=`<div class="member-photo" data-name="${m.nm}">${imgEl(m.img,m.nm)}<div class="ring"></div></div><h3>${m.nm}</h3><div class="role">${m.role}</div><p>${m.d}</p>`;
+    g.appendChild(el);
+  });
+})();
+
+/* ============================================================
+   SPLIT-FLAP DEPARTURE BOARD (signature element)
+   ============================================================ */
+(function(){
+  const CHARS="ABCDEFGHIJKLMNOPQRSTUVWXYZÉÈÏ0123456789 ";
+  const WIDTH=10; // tiles per city
+  const rowsEl=$('#boardRows');
+  const ROWN=5;
+  let offset=0;
+  const rows=[];
+
+  function makeRow(){
+    const r=document.createElement('div');r.className='board-row';
+    r.innerHTML=`
+      <div class="board-orig"><span class="code">PNR</span>POINTE-NOIRE</div>
+      <div class="arrow">→</div>
+      <div class="flap"></div>
+      <div class="board-flight"></div>
+      <div><span class="status"></span></div>`;
+    const tiles=[];const flap=$('.flap',r);
+    for(let i=0;i<WIDTH;i++){const t=document.createElement('div');t.className='flap-tile';t.textContent=' ';flap.appendChild(t);tiles.push(t);}
+    rowsEl.appendChild(r);
+    return {el:r,tiles,flight:$('.board-flight',r),status:$('.status',r)};
+  }
+
+  function flapTo(tile,target){
+    let steps=4+Math.floor(Math.random()*6);
+    const iv=setInterval(()=>{
+      if(steps<=0){tile.textContent=target;clearInterval(iv);return;}
+      tile.textContent=CHARS[Math.floor(Math.random()*CHARS.length)];
+      tile.classList.add('flipping');setTimeout(()=>tile.classList.remove('flipping'),120);
+      steps--;
+    },70);
+  }
+
+  function setRow(row,dest,statusIdx){
+    const name=dest.city.padEnd(WIDTH,' ').slice(0,WIDTH);
+    row.tiles.forEach((t,i)=>setTimeout(()=>flapTo(t,name[i]),i*55));
+    row.flight.textContent=dest.flight+'  ·  '+dest.code;
+    const st=STATUSES[statusIdx%STATUSES.length];
+    setTimeout(()=>{row.status.textContent=st.t;row.status.className='status '+st.c;},400);
+  }
+
+  for(let i=0;i<ROWN;i++)rows.push(makeRow());
+  function refresh(){
+    rows.forEach((row,i)=>{
+      const dest=BOARD_DESTS[(offset+i)%BOARD_DESTS.length];
+      setRow(row,dest,i);
+    });
+    offset=(offset+1)%BOARD_DESTS.length;
+  }
+  refresh();
+  let boardTimer;
+  const bsec=$('#board');
+  const bObs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){boardTimer=setInterval(refresh,4200);}else{clearInterval(boardTimer);}});
+  },{threshold:.2});
+  bObs.observe(bsec);
+})();
+
+/* ============================================================
+   INTERACTIVE 3D GLOBE — dotted · brand blue on light sphere
+   Glissez pour tourner · molette/pincez pour zoomer
+   ============================================================ */
+(function(){
+  const LAND_MASK = "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_specular_2048.jpg";
+  const stage = document.getElementById('stage');
+  const hint  = document.getElementById('hint');
+  const tip   = document.getElementById('tip');
+  if(!stage) return;
+
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const D2R = Math.PI / 180;
+  const R   = 2; // globe radius
+
+  const ORIGIN = {n:'Pointe-Noire', lat:-4.78,  lon:11.86};
+  const CITIES = [
+    {n:'Dubaï',       lat:25.20, lon:55.27},
+    {n:'Paris',       lat:48.86, lon:2.35},
+    {n:'Londres',     lat:51.51, lon:-0.13},
+    {n:'Istanbul',    lat:41.01, lon:28.98},
+    {n:'Bangkok',     lat:13.76, lon:100.50},
+    {n:'Singapour',   lat:1.35,  lon:103.82},
+    {n:'Île Maurice', lat:-20.35,lon:57.55},
+    {n:'Le Cap',      lat:-33.92,lon:18.42}
+  ];
+
+  /* ---- helpers ---- */
+  function vec(lat, lon, r){
+    r = r || R;
+    const phi   = (90 - lat) * D2R;
+    const theta = (lon + 180) * D2R;
+    return new THREE.Vector3(
+      -r * Math.sin(phi) * Math.cos(theta),
+       r * Math.cos(phi),
+       r * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+
+  /* ---- renderer / scene ---- */
+  const scene    = new THREE.Scene();
+  const camera   = new THREE.PerspectiveCamera(42, stage.clientWidth / stage.clientHeight, 0.1, 100);
+  let tZoom = 6; camera.position.z = tZoom;
+
+  const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(stage.clientWidth, stage.clientHeight);
+  stage.insertBefore(renderer.domElement, stage.firstChild);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+  const sun = new THREE.DirectionalLight(0xfff8f0, 0.4);
+  sun.position.set(3, 2, 5); scene.add(sun);
+
+  const world = new THREE.Group(); scene.add(world);
+
+  /* ---- ocean sphere (pale blue-grey) ---- */
+  world.add(new THREE.Mesh(
+    new THREE.SphereGeometry(R * 0.984, 64, 64),
+    new THREE.MeshPhongMaterial({color:0xd4e5f3, emissive:0xbcd4ea, emissiveIntensity:0.18, shininess:3})
+  ));
+
+  /* ---- dot sprite: brand blue ---- */
+  function makeDotTex(){
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const x = c.getContext('2d');
+    const g = x.createRadialGradient(32,32,0, 32,32,30);
+    g.addColorStop(0,   'rgba(0,87,152,1)');
+    g.addColorStop(0.55,'rgba(0,87,152,.85)');
+    g.addColorStop(1,   'rgba(0,87,152,0)');
+    x.fillStyle = g; x.beginPath(); x.arc(32,32,32,0,7); x.fill();
+    return new THREE.CanvasTexture(c);
+  }
+  const DOT = makeDotTex();
+
+  /* ---- fibonacci lattice ---- */
+  function fibSphere(n){
+    const pts = [], ga = Math.PI*(3 - Math.sqrt(5));
+    for(let i=0; i<n; i++){
+      const y = 1-(i/(n-1))*2, r = Math.sqrt(1-y*y), t = ga*i;
+      pts.push(new THREE.Vector3(Math.cos(t)*r, y, Math.sin(t)*r).multiplyScalar(R));
+    }
+    return pts;
+  }
+
+  function buildDots(isLand){
+    const cands = fibSphere(18000), pos = [];
+    cands.forEach(v => {
+      const lat = 90 - Math.acos(v.y / R) / D2R;
+      const lon = Math.atan2(v.z, -v.x) / D2R - 180;
+      if(isLand(lat, lon)) pos.push(v.x*1.004, v.y*1.004, v.z*1.004);
+    });
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    world.add(new THREE.Points(geo, new THREE.PointsMaterial({
+      color:0x005798, size:0.052, map:DOT,
+      transparent:true, alphaTest:0.28, depthWrite:false, sizeAttenuation:true
+    })));
+  }
+
+  /* graticule fallback if mask fails */
+  function buildGraticule(){
+    const m = new THREE.LineBasicMaterial({color:0x005798, transparent:true, opacity:0.28});
+    for(let la=-60; la<=60; la+=30){
+      const pts=[]; for(let lo=-180;lo<=180;lo+=6) pts.push(vec(la,lo,R*1.003));
+      world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), m));
+    }
+    for(let lo=-180; lo<180; lo+=30){
+      const pts=[]; for(let la=-90;la<=90;la+=6) pts.push(vec(la,lo,R*1.003));
+      world.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), m));
+    }
+  }
+
+  /* sample the land mask */
+  const img = new Image(); img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    const W=512, H=256, cv=document.createElement('canvas');
+    cv.width=W; cv.height=H;
+    const cx=cv.getContext('2d'); cx.drawImage(img, 0,0, W,H);
+    const data = cx.getImageData(0,0,W,H).data;
+    buildDots((lat,lon) => {
+      let u = (lon+180)/360, v = (90-lat)/180;
+      u = ((u%1)+1)%1; v = Math.min(0.999, Math.max(0, v));
+      const px = (Math.floor(v*H)*W + Math.floor(u*W))*4;
+      return (data[px]+data[px+1]+data[px+2])/3 < 95; // dark = land
+    });
+  };
+  img.onerror = buildGraticule;
+  img.src = LAND_MASK;
+
+  /* subtle atmosphere on light bg */
+  scene.add(new THREE.Mesh(
+    new THREE.SphereGeometry(R*1.13, 48, 48),
+    new THREE.MeshBasicMaterial({color:0x90c4e8, transparent:true, opacity:0.08,
+      side:THREE.BackSide, blending:THREE.AdditiveBlending})
+  ));
+
+  /* ---- markers ---- */
+  const ORANGE = 0xFE7F04;
+  const markers = [];
+  function addMarker(c, isOrigin){
+    const g = new THREE.Group();
+    const dot  = new THREE.Mesh(new THREE.SphereGeometry(isOrigin?0.075:0.054,16,16), new THREE.MeshBasicMaterial({color:ORANGE}));
+    const halo = new THREE.Mesh(new THREE.SphereGeometry(isOrigin?0.15:0.11,16,16),   new THREE.MeshBasicMaterial({color:ORANGE, transparent:true, opacity:0.3}));
+    g.add(dot); g.add(halo);
+    g.position.copy(vec(c.lat, c.lon, R*1.015));
+    world.add(g);
+    markers.push({g, dot, halo, name:c.n, isOrigin});
+  }
+  CITIES.forEach(c => addMarker(c, false));
+  addMarker(ORIGIN, true);
+
+  /* ---- arcs + travelling planes ---- */
+  const arcs = [];
+  const originPt = vec(ORIGIN.lat, ORIGIN.lon, R*1.015);
+  CITIES.forEach((c, i) => {
+    const end = vec(c.lat, c.lon, R*1.015);
+    const mid = originPt.clone().add(end).multiplyScalar(0.5);
+    mid.normalize().multiplyScalar(R + originPt.distanceTo(end)*0.55);
+    const curve = new THREE.QuadraticBezierCurve3(originPt.clone(), mid, end);
+    world.add(new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(curve.getPoints(64)),
+      new THREE.LineBasicMaterial({color:ORANGE, transparent:true, opacity:0.65})
+    ));
+    const plane = new THREE.Mesh(
+      new THREE.SphereGeometry(0.035,10,10),
+      new THREE.MeshBasicMaterial({color:0xffe0b0})
+    );
+    world.add(plane);
+    arcs.push({curve, plane, offset: i/CITIES.length});
+  });
+
+  /* ---- initial orientation: Africa faces viewer ---- */
+  function initRotY(lat, lon){
+    const phi=(90-lat)*D2R, theta=(lon+180)*D2R;
+    return Math.atan2(Math.sin(phi)*Math.cos(theta), Math.sin(phi)*Math.sin(theta));
+  }
+  let rotY=initRotY(ORIGIN.lat, ORIGIN.lon)-0.35, rotX=0.32;
+  let velX=0, velY=0, dragging=false, lastInteract=0;
+  const clamp = (v,a,b) => Math.max(a, Math.min(b,v));
+
+  /* ---- pointer controls ---- */
+  const pts = new Map(); let pinchStart=0, pinchZoom=0, lx=0, ly=0;
+  const mark = () => { lastInteract=performance.now(); hint.classList.add('hide'); };
+
+  stage.addEventListener('pointerdown', e => {
+    stage.setPointerCapture(e.pointerId);
+    pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
+    if(pts.size===1){ dragging=true; lx=e.clientX; ly=e.clientY; velX=velY=0; }
+    else if(pts.size===2){
+      const p=[...pts.values()];
+      pinchStart=Math.hypot(p[0].x-p[1].x, p[0].y-p[1].y);
+      pinchZoom=tZoom;
+    }
+    mark();
+  });
+
+  stage.addEventListener('pointermove', e => {
+    if(pts.has(e.pointerId)) pts.set(e.pointerId, {x:e.clientX, y:e.clientY});
+    if(pts.size===2){
+      const p=[...pts.values()], d=Math.hypot(p[0].x-p[1].x, p[0].y-p[1].y);
+      if(pinchStart) tZoom=clamp(pinchZoom*pinchStart/d, 3.5, 9);
+      mark(); return;
+    }
+    if(dragging){
+      const dx=e.clientX-lx, dy=e.clientY-ly; lx=e.clientX; ly=e.clientY;
+      rotY+=dx*0.005; rotX=clamp(rotX+dy*0.005,-1.25,1.25);
+      velY=dx*0.005; velX=dy*0.005; mark();
+    } else hoverTest(e);
+  });
+
+  function endPtr(e){ pts.delete(e.pointerId); if(pts.size<2) pinchStart=0; if(pts.size===0) dragging=false; }
+  stage.addEventListener('pointerup',     endPtr);
+  stage.addEventListener('pointercancel', endPtr);
+  stage.addEventListener('wheel', e => {
+    e.preventDefault();
+    tZoom=clamp(tZoom+e.deltaY*0.0022, 3.5, 9); mark();
+  },{passive:false});
+
+  /* ---- hover tooltip ---- */
+  const ray=new THREE.Raycaster(), m2=new THREE.Vector2(); let hovered=null;
+  function hoverTest(e){
+    const r=stage.getBoundingClientRect();
+    m2.x=((e.clientX-r.left)/r.width)*2-1;
+    m2.y=-((e.clientY-r.top)/r.height)*2+1;
+    ray.setFromCamera(m2, camera);
+    const hits=ray.intersectObjects(markers.map(m=>m.dot));
+    hovered = hits.length ? markers.find(m=>m.dot===hits[0].object) : null;
+    stage.style.cursor = hovered ? 'pointer' : 'grab';
+  }
+
+  /* ---- render loop ---- */
+  const tmp=new THREE.Vector3(); let running=false;
+  function frame(t){
+    if(!running) return;
+    requestAnimationFrame(frame);
+    const time = t*0.001;
+    if(!dragging){
+      rotY+=velY; rotX=clamp(rotX+velX,-1.25,1.25); velY*=0.94; velX*=0.94;
+      if(!reduce && performance.now()-lastInteract>2600) rotY+=0.0016;
+    }
+    world.rotation.y=rotY; world.rotation.x=rotX;
+    camera.position.z += (tZoom-camera.position.z)*0.1;
+
+    markers.forEach(m => {
+      const s=1+Math.sin(time*2)*0.25;
+      m.halo.scale.setScalar(s);
+      m.halo.material.opacity=0.32-0.18*Math.sin(time*2);
+    });
+    if(!reduce) arcs.forEach(a => {
+      a.plane.position.copy(a.curve.getPointAt((time*0.12+a.offset)%1));
+    });
+
+    if(hovered){
+      hovered.g.getWorldPosition(tmp);
+      if(tmp.clone().normalize().z>0.12){
+        tmp.project(camera);
+        const r=stage.getBoundingClientRect();
+        tip.style.left=((tmp.x*0.5+0.5)*r.width)+'px';
+        tip.style.top=((-tmp.y*0.5+0.5)*r.height)+'px';
+        tip.innerHTML = hovered.isOrigin ? '<b>'+hovered.name+'</b> · départ' : hovered.name;
+        tip.classList.add('show');
+      } else tip.classList.remove('show');
+    } else tip.classList.remove('show');
+
+    renderer.render(scene, camera);
+  }
+
+  /* ---- resize ---- */
+  function resize(){
+    const w=stage.clientWidth, h=stage.clientHeight;
+    if(!w||!h) return;
+    camera.aspect=w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h);
+  }
+  new ResizeObserver(resize).observe(stage);
+
+  /* ---- only render while visible ---- */
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting && !running){ running=true; requestAnimationFrame(frame); }
+    else if(!e.isIntersecting) running=false;
+  }),{threshold:0.05}).observe(stage);
+
+  setTimeout(()=>{ if(performance.now()-lastInteract<100) hint.classList.add('hide'); },10000);
+})();
+
+/* ============================================================
+   INTERACTIONS
+   ============================================================ */
+// nav scroll state
+const nav=$('#nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+// burger
+$('#burger').addEventListener('click',()=>$('#navLinks').classList.toggle('open'));
+$$('#navLinks a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
+
+// reveal on scroll
+const rObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rObs.unobserve(e.target);}}),{threshold:.12});
+$$('.reveal').forEach(el=>rObs.observe(el));
+
+// counters
+function animateCount(el){
+  const target=+el.dataset.count;const plus=el.querySelector('.plus');
+  let cur=0;const dur=1400,t0=performance.now();
+  function step(t){
+    const p=Math.min((t-t0)/dur,1);const val=Math.floor(p*target*(2-p)); // easeOut
+    el.firstChild.nodeValue=val.toLocaleString('fr-FR');
+    if(plus)el.appendChild(plus);
+    if(p<1)requestAnimationFrame(step);else{el.firstChild.nodeValue=target.toLocaleString('fr-FR');if(plus)el.appendChild(plus);}
+  }
+  requestAnimationFrame(step);
+}
+const cObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){animateCount(e.target);cObs.unobserve(e.target);}}),{threshold:.5});
+$$('.trust-num[data-count]').forEach(el=>{el.insertBefore(document.createTextNode('0'),el.firstChild);cObs.observe(el);});
+
+// enquiry form
+$('#enquirySubmit').addEventListener('click',()=>{
+  const tel=$('#f-tel');
+  if(!tel.value.trim()){tel.focus();tel.style.borderColor='var(--orange)';return;}
+  $('#enquiryForm').style.display='none';
+  $('#enquirySuccess').classList.add('show');
+});
+
+// newsletter
+$('#newsBtn').addEventListener('click',()=>{
+  const em=$('#newsEmail');
+  if(!em.value.includes('@')){em.focus();return;}
+  em.value='';$('#newsOk').classList.add('show');
+  setTimeout(()=>$('#newsOk').classList.remove('show'),4000);
+});
+
+// whatsapp links
+$('#waFloat').href=waLink();
+$('#waContact').href=waLink();
+$('#waContact').target='_blank';$('#waFloat').target='_blank';
+// show whatsapp tip briefly after load
+setTimeout(()=>{$('#waTip').classList.add('show');setTimeout(()=>$('#waTip').classList.remove('show'),4000);},2500);
+
+// year
+$('#year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
